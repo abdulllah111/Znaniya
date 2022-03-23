@@ -16,6 +16,7 @@
     <Folder Include="Domain\" />
     <Folder Include="Service\" />
     <Folder Include="teeeest\" />
+    <Folder Include="test\" />
   </ItemGroup>
 
 </Project>
