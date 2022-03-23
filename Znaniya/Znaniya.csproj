@@ -12,7 +12,6 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\" />
     <Folder Include="Models\ViewComponents\" />
-    <Folder Include="wwwroot\sass\" />
     <Folder Include="Domain\" />
     <Folder Include="Service\" />
     <Folder Include="test\" />
