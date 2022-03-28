@@ -8,6 +8,5 @@ namespace Znaniya.Domain.Repositories.Abstract
         ServiceItem GetServiceItemById(Guid id);
         void SaveServiceItem(ServiceItem entity);
         void DeleteServiceItem(Guid id);
-
     }
 }
