@@ -1,4 +1,5 @@
-﻿<div id="sidebar">
+﻿@using Znaniya.Service;
+<div id="sidebar">
 	<div class="inner">
 
 		<!-- Search -->
@@ -65,13 +66,13 @@
 		<!-- Section -->
 			<section>
 				<header class="major">
-					<h2>База знаний БРСК</h2>
+					<h2>@Config.CompanyName</h2>
 				</header>
 				<ul class="contact">
-					<li class="icon solid fa-envelope"><a href="#">mail@brsc.ru</a></li>
-					<li class="icon solid fa-phone">+7 (347) 276-91-69</li>
-					<li class="icon solid fa-home">ул. Цюрупы д.40<br />
-					Уфа, Республика Башкортостан</li>
+					<li class="icon solid fa-envelope"><a href="#">@Config.CompanyEmail</a></li>
+					<li class="icon solid fa-phone">@Config.CompanyPhone</li>
+					<li class="icon solid fa-home">@Config.CompanyStaticAdress<br />
+					@Config.CompanyStaticRegion</li>
 				</ul>
 			</section>
 
