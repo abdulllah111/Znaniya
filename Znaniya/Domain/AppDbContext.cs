@@ -10,8 +10,8 @@ namespace Znaniya.Domain
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-        public DbSet<TextField> TextFields { get; set; }
-        public DbSet<ServiceItem> ServiceItems { get; set; }
+        public DbSet<TextField>? TextFields { get; set; }
+        public DbSet<ServiceItem>? ServiceItems { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -32,7 +32,7 @@ namespace Znaniya.Domain
                 Email = "my@email.com",
                 NormalizedEmail = "MY@EMAIL.COM",
                 EmailConfirmed = true,
-                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "superpassword"),
+                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null!, "superpassword"),
                 SecurityStamp = string.Empty
             });
 

@@ -20,7 +20,7 @@ builder.Services.AddTransient<IServiceItemsRepository, EFServiceItemsRepository>
 builder.Services.AddTransient<DataManager>();
 
 //подключаем контекст БД
-builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString));
+builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString!));
 
 var app = builder.Build();
 

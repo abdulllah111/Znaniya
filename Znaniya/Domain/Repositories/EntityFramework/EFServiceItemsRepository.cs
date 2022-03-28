@@ -16,12 +16,12 @@ namespace Znaniya.Domain.Repositories.EntityFramework
 
         public IQueryable<ServiceItem> GetServiceItems()
         {
-            return context.ServiceItems;
+            return context.ServiceItems!;
         }
 
         public ServiceItem GetServiceItemById(Guid id)
         {
-            return context.ServiceItems.FirstOrDefault(x => x.Id == id);
+            return context.ServiceItems!.FirstOrDefault(x => x.Id == id)!;
         }
 
         public void SaveServiceItem(ServiceItem entity)
@@ -35,7 +35,7 @@ namespace Znaniya.Domain.Repositories.EntityFramework
 
         public void DeleteServiceItem(Guid id)
         {
-            context.ServiceItems.Remove(new ServiceItem() { Id = id });
+            context.ServiceItems!.Remove(new ServiceItem() { Id = id });
             context.SaveChanges();
         }
     }
