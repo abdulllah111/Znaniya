@@ -4,11 +4,10 @@ namespace Znaniya.Domain.Repositories.Abstract
 {
     public interface IServiceItemsRepository
     {
-        IQueryable<TextField> GetTextFields();
-        TextField GetTextFieldById(int id);
-        TextField GetTextFieldByCodeWord(string codeWord);
-        void SaveTextFlield(TextField entity);
-        void DeleteTextFlield(Guid id);
+        IQueryable<ServiceItem> GetServiceItems();
+        ServiceItem GetServiceItemById(Guid id);
+        void SaveServiceItem(ServiceItem entity);
+        void DeleteServiceItem(Guid id);
 
     }
 }
