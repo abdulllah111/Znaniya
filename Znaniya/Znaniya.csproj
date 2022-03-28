@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="test\**" />
+    <Content Remove="test\**" />
+    <EmbeddedResource Remove="test\**" />
+    <None Remove="test\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="bundleconfig.json" />
     <Content Remove="compilerconfig.json" />
   </ItemGroup>
@@ -18,7 +25,6 @@
     <Folder Include="Areas\Admin\" />
     <Folder Include="Models\ViewComponents\" />
     <Folder Include="Domain\" />
-    <Folder Include="test\" />
   </ItemGroup>
 
   <ItemGroup>
