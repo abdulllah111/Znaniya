@@ -4,7 +4,7 @@ namespace Znaniya.Domain.Entities
 {
     public abstract class EntityBase
     {
-        protected EntityBase () => DateAdded = DateTime.UtcNow; 
+        protected EntityBase() => DateAdded = DateTime.UtcNow; 
 
         [Required]
         public Guid Id { get; set; }
