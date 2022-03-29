@@ -25,14 +25,14 @@ builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.Connectio
 var app = builder.Build();
 
 //настраиваем identity систему
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
-    opts.User.RequireUniqueEmail = true;
-    opts.Password.RequiredLength = 6;
-    opts.Password.RequireNonAlphanumeric = false;
-    opts.Password.RequireLowercase = false;
-    opts.Password.RequireUppercase = false;
-    opts.Password.RequireDigit = false;
+    options.User.RequireUniqueEmail = true;
+    options.Password.RequiredLength = 6;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireDigit = false;
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 //настраиваем authentication cookie
@@ -45,8 +45,18 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.SlidingExpiration = true;
 });
 
+//настраиваем политику авторизации для Admin area
+builder.Services.AddAuthorization(x =>
+{
+    x.AddPolicy("Admin", policy => { policy.RequireRole("admin"); });
+});
+
 //добавляем сервисы для контроллеров и представлений (MVC)
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(x =>
+{
+    x.Conventions.Add(new AdminAreaAuthorization("Admin", "AdminArea"));
+});
+
 
 // Configure the HTTP request pipeline.
 //Подробная информация об ошибках
@@ -68,6 +78,7 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
+    endpoints.MapControllerRoute("admin", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
     endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 });
 
