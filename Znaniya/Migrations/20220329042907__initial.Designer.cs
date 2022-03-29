@@ -12,7 +12,7 @@ using Znaniya.Domain;
 namespace Znaniya.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220328095448__initial")]
+    [Migration("20220329042907__initial")]
     partial class _initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,7 +54,7 @@ namespace Znaniya.Migrations
                         new
                         {
                             Id = "44546e06-8719-4ad8-b88a-f271ae9d6eab",
-                            ConcurrencyStamp = "4aa72f06-5ab3-4c9e-9525-02ca881dafc5",
+                            ConcurrencyStamp = "00664b5b-4053-4374-a81d-1e7256f7068c",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -154,13 +154,13 @@ namespace Znaniya.Migrations
                         {
                             Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d0eb4403-266d-498e-a6ef-a437bcee1fc9",
+                            ConcurrencyStamp = "de76dcb8-e745-4a55-b3cb-a6e5af870ce2",
                             Email = "my@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MY@EMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP3qQ0Qa7zxdqhysQeIlrPBGiheqmM1bcm0JbY06w6vvopqabeDkEuNa2mpApVAW+Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEO8YkPlvl6g6D+s8axLJ7OXGF8QapGvJsN+QT7bwm2AVVdh+jhfaK4DpNO8PG3C3QQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,

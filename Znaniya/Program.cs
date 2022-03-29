@@ -22,8 +22,6 @@ builder.Services.AddTransient<DataManager>();
 //подключаем контекст БД
 builder.Services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Config.ConnectionString!));
 
-var app = builder.Build();
-
 //настраиваем identity систему
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
 {
@@ -34,6 +32,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(opts =>
     opts.Password.RequireUppercase = false;
     opts.Password.RequireDigit = false;
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
+
 
 //настраиваем authentication cookie
 builder.Services.ConfigureApplicationCookie(options =>
@@ -47,6 +46,12 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 //добавляем сервисы для контроллеров и представлений (MVC)
 builder.Services.AddControllersWithViews();
+
+var app = builder.Build();
+
+
+
+
 
 // Configure the HTTP request pipeline.
 //Подробная информация об ошибках

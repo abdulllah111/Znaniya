@@ -196,12 +196,12 @@ namespace Znaniya.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "44546e06-8719-4ad8-b88a-f271ae9d6eab", "d3dc9561-8d32-495a-9be9-e4939ebeab61", "admin", "ADMIN" });
+                values: new object[] { "44546e06-8719-4ad8-b88a-f271ae9d6eab", "00664b5b-4053-4374-a81d-1e7256f7068c", "admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3b62472e-4f66-49fa-a20f-e7685b9565d8", 0, "a4dc631d-3937-4e49-a66b-020243ad628e", "my@email.com", true, false, null, "MY@EMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAELj1v3Xp+N042RLAP2/dKAOIEaU5ArVhkZxOu9C72rmy/Uc16phf+ZHU21fjE5XnyQ==", null, false, "", false, "admin" });
+                values: new object[] { "3b62472e-4f66-49fa-a20f-e7685b9565d8", 0, "de76dcb8-e745-4a55-b3cb-a6e5af870ce2", "my@email.com", true, false, null, "MY@EMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEO8YkPlvl6g6D+s8axLJ7OXGF8QapGvJsN+QT7bwm2AVVdh+jhfaK4DpNO8PG3C3QQ==", null, false, "", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "TextFields",
