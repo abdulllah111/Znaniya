@@ -6,11 +6,12 @@ namespace Znaniya.Models
     {
         [Required]
         [Display(Name ="Логин")]
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
 
         [Required]
+        [UIHint("password")]
         [Display(Name = "Пароль")]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
         [Display(Name = "Запомнить меня?")]
         public bool RememberMe { get; set; }
