@@ -1,44 +1,39 @@
 ﻿
-
-@model IQueryable<Znaniya.Domain.Entities.ServiceItem>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model IQueryable<Znaniya.Domain.Entities.Shelf>
 @{
     string strTitle = "Панель администратора";
     ViewBag.Title = strTitle;
 }
-
 <div>
     <h2>@strTitle</h2>
     <div>
-        <h3>Наши услуги</h3>
+        <h3>Полки</h3>
+
+        <br />
         <div class="div-box">
-            <a asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" asp-route-id="">Добавить услугу</a>
+            <a asp-area="Admin" asp-controller="Shelfs" asp-action="Edit" asp-route-id="">Добавить полку</a>
         </div>
         @if (Model.Any())
         {
             <div>
-                @foreach (Znaniya.Domain.Entities.ServiceItem entity in Model)
+                @foreach (Znaniya.Domain.Entities.Shelf entity in Model)
                 {
                     <div>
-                        <a asp-area="Admin" asp-controller="ServiceItems" asp-action="Edit" asp-route-id="@entity.Id">редактировать</a>
+                        <a asp-area="Admin" asp-controller="Shelfs" asp-action="Edit" asp-route-id="@entity.ShelfID">редактировать</a>
                         |
-                        <form style="display: inline-block;" id="form-@entity.Id" asp-area="Admin" asp-controller="ServiceItems" asp-action="Delete" method="post">
-                            <input type="hidden" name="id" value="@entity.Id">
-                            <a href="#" onclick="document.getElementById('form-@entity.Id').submit();">удалить</a>
+                        <form style="display: inline-block;" id="form-@entity.ShelfID" asp-area="Admin" asp-controller="ServiceItems" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@entity.ShelfID">
+                            <a href="#" onclick="document.getElementById('form-@entity.ShelfID').submit();">удалить</a>
                         </form>
                         |
-                        <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.Id">
+                        <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.ShelfID">
                             @($"{entity.Title}")
                         </a>
                     </div>
                 }
             </div>
         }
-    </div>
-    <div class="div-box">
-        <h3>Редактировать страницы сайта</h3>
-        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageIndex">Главная</a>
-        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageServices">Наши услуги</a>
-        <a asp-area="Admin" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="PageContacts">Контакты</a>
     </div>
     <div class="div-box">
         <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">

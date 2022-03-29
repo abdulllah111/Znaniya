@@ -52,7 +52,7 @@ namespace Znaniya.Migrations
                         new
                         {
                             Id = "44546e06-8719-4ad8-b88a-f271ae9d6eab",
-                            ConcurrencyStamp = "07b0129c-5f6a-4c75-8121-da7a944e97d7",
+                            ConcurrencyStamp = "086665da-f39d-4355-96f6-561c1efa6985",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         });
@@ -152,13 +152,13 @@ namespace Znaniya.Migrations
                         {
                             Id = "3b62472e-4f66-49fa-a20f-e7685b9565d8",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e9451273-c327-485b-a788-bb2a1833b2ea",
+                            ConcurrencyStamp = "97625139-e170-47b7-a800-d5e42c2b9619",
                             Email = "my@email.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MY@EMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPnQiv0A1T2zVXHITkieCC1UGwGNchnXBNT4vhxuWZ0JXxK/OnRQydc1UyQVmEgpsA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAELSaUfGFV8VVaH3aI2apPR6JScDtDh2kMAM0HOv3Wwq8CwxUdrFzRzZIXt2qvrzvIw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -254,9 +254,9 @@ namespace Znaniya.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Znaniya.Domain.Entities.ServiceItem", b =>
+            modelBuilder.Entity("Znaniya.Domain.Entities.Book", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("BookID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -272,6 +272,9 @@ namespace Znaniya.Migrations
                     b.Property<string>("MetaTitle")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("ShelfID")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Subtitle")
                         .HasColumnType("nvarchar(max)");
 
@@ -285,20 +288,21 @@ namespace Znaniya.Migrations
                     b.Property<string>("TitleImagePath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("BookID");
 
-                    b.ToTable("ServiceItems");
+                    b.HasIndex("ShelfID");
+
+                    b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("Znaniya.Domain.Entities.TextField", b =>
+            modelBuilder.Entity("Znaniya.Domain.Entities.Chapter", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("ChapterId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CodeWord")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("BookID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("datetime2");
@@ -319,40 +323,94 @@ namespace Znaniya.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("TitleImagePath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ChapterId");
 
-                    b.ToTable("TextFields");
+                    b.HasIndex("BookID");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("63dc8fa6-07ae-4391-8916-e057f71239ce"),
-                            CodeWord = "PageIndex",
-                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Text = "Содержание заполняется администратором",
-                            Title = "Главная"
-                        },
-                        new
-                        {
-                            Id = new Guid("70bf165a-700a-4156-91c0-e83fce0a277f"),
-                            CodeWord = "PageServices",
-                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Text = "Содержание заполняется администратором",
-                            Title = "Наши услуги"
-                        },
-                        new
-                        {
-                            Id = new Guid("4aa76a4c-c59d-409a-84c1-06e6487a137a"),
-                            CodeWord = "PageContacts",
-                            DateAdded = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Text = "Содержание заполняется администратором",
-                            Title = "Контакты"
-                        });
+                    b.ToTable("Chapters");
+                });
+
+            modelBuilder.Entity("Znaniya.Domain.Entities.Page", b =>
+                {
+                    b.Property<Guid>("PageID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ChapterID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MetaDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaKeywords")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subtitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PageID");
+
+                    b.HasIndex("ChapterID");
+
+                    b.ToTable("Pages");
+                });
+
+            modelBuilder.Entity("Znaniya.Domain.Entities.Shelf", b =>
+                {
+                    b.Property<Guid>("ShelfID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MetaDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaKeywords")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MetaTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subtitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TitleImagePath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ShelfID");
+
+                    b.ToTable("Shelfs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -404,6 +462,54 @@ namespace Znaniya.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Znaniya.Domain.Entities.Book", b =>
+                {
+                    b.HasOne("Znaniya.Domain.Entities.Shelf", "Shelf")
+                        .WithMany("Books")
+                        .HasForeignKey("ShelfID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Shelf");
+                });
+
+            modelBuilder.Entity("Znaniya.Domain.Entities.Chapter", b =>
+                {
+                    b.HasOne("Znaniya.Domain.Entities.Book", "Book")
+                        .WithMany("Chapters")
+                        .HasForeignKey("BookID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+                });
+
+            modelBuilder.Entity("Znaniya.Domain.Entities.Page", b =>
+                {
+                    b.HasOne("Znaniya.Domain.Entities.Chapter", "Chapter")
+                        .WithMany("Pages")
+                        .HasForeignKey("ChapterID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Chapter");
+                });
+
+            modelBuilder.Entity("Znaniya.Domain.Entities.Book", b =>
+                {
+                    b.Navigation("Chapters");
+                });
+
+            modelBuilder.Entity("Znaniya.Domain.Entities.Chapter", b =>
+                {
+                    b.Navigation("Pages");
+                });
+
+            modelBuilder.Entity("Znaniya.Domain.Entities.Shelf", b =>
+                {
+                    b.Navigation("Books");
                 });
 #pragma warning restore 612, 618
         }

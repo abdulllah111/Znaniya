@@ -4,13 +4,17 @@ namespace Znaniya.Domain
 {
     public class DataManager
     {
-        public ITextFieldsRepository TextFields { get; set; }
-        public IServiceItemsRepository ServiceItems { get; set; }
-
-        public DataManager(ITextFieldsRepository textFieldsRepository, IServiceItemsRepository serviceItemsRepository)
+        public IShelfsRepository Shelfs { get; set; }
+        public IBooksRepository Books { get; set; }
+        public IChaptersRepository Chapters { get; set; }
+        public IPageRepository Pages { get; set; }
+        public DataManager(IShelfsRepository shelfsRepository, IBooksRepository booksRepository, IChaptersRepository chaptersRepository, IPageRepository pagesRepository
+)
         {
-            TextFields = textFieldsRepository;
-            ServiceItems = serviceItemsRepository;
+            Shelfs = shelfsRepository;
+            Books = booksRepository;
+            Chapters = chaptersRepository;
+            Pages = pagesRepository;
         }
     }
 }

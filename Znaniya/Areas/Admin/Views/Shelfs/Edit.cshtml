@@ -1,0 +1,46 @@
+﻿
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model Znaniya.Domain.Entities.Shelf
+
+@{
+    string strTitle = "Редактировать запись";
+    ViewBag.Title = strTitle;
+}
+
+<script src="~/js/ckeditor/ckeditor.js"></script>
+
+<h1>Edit</h1>
+
+<h4>Shelf</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-area="Admin" asp-controller="Shelfs" asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ShelfID" />
+            <input asp-for="DateAdded" type="hidden"/>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label"></label>
+                <textarea asp-for="Text"></textarea>
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    window.onload = function() {
+        var newCKEdit = CKEDITOR.replace('@Html.IdFor(x=>x.Text)');
+        newCKEdit.updateElement();
+    }
+</script>

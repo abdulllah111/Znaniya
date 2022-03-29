@@ -15,8 +15,10 @@ builder.Services.AddControllersWithViews();
 builder.Configuration.Bind("Project", new Config());
 
 //подключаем нужный функционал приложения в качестве сервисов
-builder.Services.AddTransient<ITextFieldsRepository, EFTextFieldsRepository>();
-builder.Services.AddTransient<IServiceItemsRepository, EFServiceItemsRepository>();
+builder.Services.AddTransient<IShelfsRepository, EFShelfsRepository>();
+builder.Services.AddTransient<IBooksRepository, EFBooksRepository>();
+builder.Services.AddTransient<IChaptersRepository, EFChaptersRepository>();
+builder.Services.AddTransient<IPageRepository, EFPagesRepository>();
 builder.Services.AddTransient<DataManager>();
 
 //подключаем контекст БД

@@ -49,31 +49,11 @@ namespace Znaniya.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ServiceItems",
+                name: "Shelfs",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ShelfID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Subtitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TitleImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MetaTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MetaDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MetaKeywords = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ServiceItems", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TextFields",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CodeWord = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Subtitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TitleImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -84,7 +64,7 @@ namespace Znaniya.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TextFields", x => x.Id);
+                    table.PrimaryKey("PK_Shelfs", x => x.ShelfID);
                 });
 
             migrationBuilder.CreateTable(
@@ -193,25 +173,93 @@ namespace Znaniya.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Books",
+                columns: table => new
+                {
+                    BookID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ShelfID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Subtitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TitleImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MetaTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MetaDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MetaKeywords = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Books", x => x.BookID);
+                    table.ForeignKey(
+                        name: "FK_Books_Shelfs_ShelfID",
+                        column: x => x.ShelfID,
+                        principalTable: "Shelfs",
+                        principalColumn: "ShelfID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Chapters",
+                columns: table => new
+                {
+                    ChapterId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BookID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Subtitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TitleImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MetaTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MetaDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MetaKeywords = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Chapters", x => x.ChapterId);
+                    table.ForeignKey(
+                        name: "FK_Chapters_Books_BookID",
+                        column: x => x.BookID,
+                        principalTable: "Books",
+                        principalColumn: "BookID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pages",
+                columns: table => new
+                {
+                    PageID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ChapterID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Subtitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TitleImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MetaTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MetaDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MetaKeywords = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DateAdded = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pages", x => x.PageID);
+                    table.ForeignKey(
+                        name: "FK_Pages_Chapters_ChapterID",
+                        column: x => x.ChapterID,
+                        principalTable: "Chapters",
+                        principalColumn: "ChapterId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "44546e06-8719-4ad8-b88a-f271ae9d6eab", "00664b5b-4053-4374-a81d-1e7256f7068c", "admin", "ADMIN" });
+                values: new object[] { "44546e06-8719-4ad8-b88a-f271ae9d6eab", "086665da-f39d-4355-96f6-561c1efa6985", "admin", "ADMIN" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "3b62472e-4f66-49fa-a20f-e7685b9565d8", 0, "de76dcb8-e745-4a55-b3cb-a6e5af870ce2", "my@email.com", true, false, null, "MY@EMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAEO8YkPlvl6g6D+s8axLJ7OXGF8QapGvJsN+QT7bwm2AVVdh+jhfaK4DpNO8PG3C3QQ==", null, false, "", false, "admin" });
-
-            migrationBuilder.InsertData(
-                table: "TextFields",
-                columns: new[] { "Id", "CodeWord", "DateAdded", "MetaDescription", "MetaKeywords", "MetaTitle", "Subtitle", "Text", "Title", "TitleImagePath" },
-                values: new object[,]
-                {
-                    { new Guid("4aa76a4c-c59d-409a-84c1-06e6487a137a"), "PageContacts", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, null, "Содержание заполняется администратором", "Контакты", null },
-                    { new Guid("63dc8fa6-07ae-4391-8916-e057f71239ce"), "PageIndex", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, null, "Содержание заполняется администратором", "Главная", null },
-                    { new Guid("70bf165a-700a-4156-91c0-e83fce0a277f"), "PageServices", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, null, "Содержание заполняется администратором", "Наши услуги", null }
-                });
+                values: new object[] { "3b62472e-4f66-49fa-a20f-e7685b9565d8", 0, "97625139-e170-47b7-a800-d5e42c2b9619", "my@email.com", true, false, null, "MY@EMAIL.COM", "ADMIN", "AQAAAAEAACcQAAAAELSaUfGFV8VVaH3aI2apPR6JScDtDh2kMAM0HOv3Wwq8CwxUdrFzRzZIXt2qvrzvIw==", null, false, "", false, "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -256,6 +304,21 @@ namespace Znaniya.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Books_ShelfID",
+                table: "Books",
+                column: "ShelfID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Chapters_BookID",
+                table: "Chapters",
+                column: "BookID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Pages_ChapterID",
+                table: "Pages",
+                column: "ChapterID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -276,16 +339,22 @@ namespace Znaniya.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "ServiceItems");
-
-            migrationBuilder.DropTable(
-                name: "TextFields");
+                name: "Pages");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Chapters");
+
+            migrationBuilder.DropTable(
+                name: "Books");
+
+            migrationBuilder.DropTable(
+                name: "Shelfs");
         }
     }
 }

@@ -6,36 +6,36 @@ using Znaniya.Domain.Entities;
 
 namespace Znaniya.Domain.Repositories.EntityFramework
 {
-    public class EFServiceItemsRepository : IServiceItemsRepository
+    public class EFShelfsRepository : IShelfsRepository
     {
         private readonly AppDbContext context;
-        public EFServiceItemsRepository(AppDbContext context)
+        public EFShelfsRepository(AppDbContext context)
         {
             this.context = context;
         }
 
-        public IQueryable<ServiceItem> GetServiceItems()
+        public IQueryable<Shelf> GetShelves()
         {
-            return context.ServiceItems!;
+            return context.Shelfs!;
         }
 
-        public ServiceItem GetServiceItemById(Guid id)
+        public Shelf GetShelfById(Guid id)
         {
-            return context.ServiceItems!.FirstOrDefault(x => x.Id == id)!;
+            return context.Shelfs!.FirstOrDefault(x => x.ShelfID == id)!;
         }
 
-        public void SaveServiceItem(ServiceItem entity)
+        public void SaveShelf(Shelf entity)
         {
-            if (entity.Id == default)
+            if (entity.ShelfID == default)
                 context.Entry(entity).State = EntityState.Added;
             else
                 context.Entry(entity).State = EntityState.Modified;
             context.SaveChanges();
         }
 
-        public void DeleteServiceItem(Guid id)
+        public void DeleteShelf(Guid id)
         {
-            context.ServiceItems!.Remove(new ServiceItem() { Id = id });
+            context.Shelfs!.Remove(new Shelf() { ShelfID = id });
             context.SaveChanges();
         }
     }
