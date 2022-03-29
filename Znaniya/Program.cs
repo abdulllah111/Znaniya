@@ -47,7 +47,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 //настраиваем политику авторизации для Admin area
 builder.Services.AddAuthorization(x =>
 {
-    x.AddPolicy("Admin", policy => { policy.RequireRole("admin"); });
+    x.AddPolicy("AdminArea", policy => { policy.RequireRole("admin"); });
 });
 
 //добавляем сервисы для контроллеров и представлений (MVC)
