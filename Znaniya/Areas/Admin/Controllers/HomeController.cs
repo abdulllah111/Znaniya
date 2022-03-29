@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using Znaniya.Domain;
-using Znaniya.Models;
 
-namespace Znaniya.Controllers
+namespace Znaniya.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class HomeController : Controller
     {
-      public IActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
