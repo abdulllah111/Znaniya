@@ -20,8 +20,9 @@ namespace MyCompany.Areas.Admin.Controllers
             this.dataManager = dataManager;
             this.hostingEnvironment = hostingEnvironment;
         }
-        public IActionResult BooksInShelf(Shelf model)
+        public IActionResult Index(Guid id)
         {
+            var model = dataManager.Shelfs.GetShelfById(id);
             model.Books = dataManager.Books.GetBookByShelfId(model.ShelfID);
             return View(model);
         }
