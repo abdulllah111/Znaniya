@@ -4,19 +4,19 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
 
-<h4>Book</h4>
+<h1>Книга</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-area="Admin" asp-controller="Books" asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BookID" />
+            <input asp-for="ShelfID" type="hidden"/>
             <input asp-for="DateAdded" type="hidden"  class="form-control" />
             <div class="form-group">
                 <label asp-for="ShelfID" class="control-label"></label>
-                <select asp-for="ShelfID" class="form-control" asp-items="ViewBag.ShelfID"></select>
+                
                 <span asp-validation-for="ShelfID" class="text-danger"></span>
             </div>
             <div class="form-group">
