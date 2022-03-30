@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Znaniya.Domain;
+using Znaniya.Domain.Entities;
 
 namespace Znaniya.Areas.Admin.Controllers
 {
@@ -16,7 +17,16 @@ namespace Znaniya.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            return View(dataManager.Shelfs.GetShelves());
+            var model = new AllPositions
+            {
+                Shelves = dataManager.Shelfs.GetShelves(),
+                Books = dataManager.Books.GetBooks(),
+                Chapters = dataManager.Chapters.GetChapters(),
+                Pages = dataManager.Pages.GetPages(),
+
+            };
+            return View(model);
+
         }
     }
 }

@@ -23,7 +23,10 @@ namespace Znaniya.Domain.Repositories.EntityFramework
         {
             return context.Books!.FirstOrDefault(x => x.BookID == id)!;
         }
-
+        public IQueryable<Book> GetBookByShelfId(Guid id)
+        {
+            return context.Books!.Where(x => x.ShelfID == id)!;
+        }
         public void SaveBook(Book entity)
         {
             if (entity.BookID == default)

@@ -1,6 +1,5 @@
-﻿
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model IQueryable<Znaniya.Domain.Entities.Shelf>
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Znaniya.Domain.Entities.AllPositions
 @{
     string strTitle = "Панель администратора";
     ViewBag.Title = strTitle;
@@ -14,20 +13,21 @@
         <div class="div-box">
             <a asp-area="Admin" asp-controller="Shelfs" asp-action="Edit" asp-route-id="">Добавить полку</a>
         </div>
-        @if (Model.Any())
+        <br />
+        @if (Model.Shelves.Any())
         {
             <div>
-                @foreach (Znaniya.Domain.Entities.Shelf entity in Model)
+                @foreach (Znaniya.Domain.Entities.Shelf entity in Model.Shelves)
                 {
                     <div>
                         <a asp-area="Admin" asp-controller="Shelfs" asp-action="Edit" asp-route-id="@entity.ShelfID">редактировать</a>
                         |
-                        <form style="display: inline-block;" id="form-@entity.ShelfID" asp-area="Admin" asp-controller="ServiceItems" asp-action="Delete" method="post">
+                        <form style="display: inline-block;" id="form-@entity.ShelfID" asp-area="Admin" asp-controller="Shelfs" asp-action="Delete" method="post">
                             <input type="hidden" name="id" value="@entity.ShelfID">
                             <a href="#" onclick="document.getElementById('form-@entity.ShelfID').submit();">удалить</a>
                         </form>
                         |
-                        <a asp-area="" asp-controller="Services" asp-action="Index" asp-route-id="@entity.ShelfID">
+                        <a asp-area="" asp-controller="Shelfs" asp-action="BooksInShelf" asp-route-id="@entity.ShelfID">
                             @($"{entity.Title}")
                         </a>
                     </div>
@@ -35,6 +35,37 @@
             </div>
         }
     </div>
+
+    <div>
+        <h3>Книги</h3>
+
+        <br />
+        <div class="div-box">
+            <a asp-area="Admin" asp-controller="Books" asp-action="Edit" asp-route-id="">Добавить книгу</a>
+        </div>
+        <br />
+        @if (Model.Books.Any())
+        {
+            <div>
+                @foreach (Znaniya.Domain.Entities.Book entity in Model.Books)
+                {
+                    <div>
+                        <a asp-area="Admin" asp-controller="Books" asp-action="Edit" asp-route-id="@entity.BookID">редактировать</a>
+                        |
+                        <form style="display: inline-block;" id="form-@entity.BookID" asp-area="Admin" asp-controller="Books" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@entity.BookID">
+                            <a href="#" onclick="document.getElementById('form-@entity.BookID').submit();">удалить</a>
+                        </form>
+                        |
+                        <a asp-area="" asp-controller="Books" asp-action="Index" asp-route-id="@entity.BookID">
+                            @($"{entity.Title}")
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
     <div class="div-box">
         <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">
             <input type="submit" value="Выйти" />

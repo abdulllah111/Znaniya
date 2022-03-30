@@ -15,7 +15,7 @@ namespace Znaniya.Domain.Entities
         [Display(Name = "Полное описание книги")]
         public override string? Text { get; set; }
 
-        public Shelf Shelf { get; set; }
-        public ICollection<Chapter> Chapters { get; set; }
+        public Shelf? Shelf { get; set; }
+        public ICollection<Chapter>? Chapters { get; set; }
     }
 }

@@ -8,34 +8,29 @@ using Znaniya.Domain;
 using Znaniya.Service;
 using Znaniya.Domain.Entities;
 
-namespace MyCompany.Areas.Admin.Controllers
+namespace Znaniya.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class ShelfsController : Controller
+    public class BooksController : Controller
     {
         private readonly DataManager dataManager;
         private readonly IWebHostEnvironment hostingEnvironment;
-        public ShelfsController(DataManager dataManager, IWebHostEnvironment hostingEnvironment)
+        public BooksController(DataManager dataManager, IWebHostEnvironment hostingEnvironment)
         {
             this.dataManager = dataManager;
             this.hostingEnvironment = hostingEnvironment;
         }
-        public IActionResult BooksInShelf(Shelf model)
-        {
-            model.Books = dataManager.Books.GetBookByShelfId(model.ShelfID);
-            return View(model);
-        }
         public IActionResult Edit(Guid id)
         {
-            var entity = id == default ? new Shelf() : dataManager.Shelfs.GetShelfById(id);
+            var entity = id == default ? new Book() : dataManager.Books.GetBookById(id);
             return View(entity);
         }
         [HttpPost]
-        public IActionResult Edit(Shelf model)
+        public IActionResult Edit(Book model)
         {
             if (ModelState.IsValid)
             {
-                dataManager.Shelfs.SaveShelf(model);
+                dataManager.Books.SaveBook(model);
                 return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
             }
             return View(model);
@@ -44,7 +39,7 @@ namespace MyCompany.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Delete(Guid id)
         {
-            dataManager.Shelfs.DeleteShelf(id);
+            dataManager.Books.DeleteBook(id);
             return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
         }
     }

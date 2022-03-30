@@ -15,6 +15,6 @@ namespace Znaniya.Domain.Entities
         [Display(Name = "Полное описание книги")]
         public override string? Text { get; set; }
 
-        public Chapter Chapter { get; set; }
+        public Chapter? Chapter { get; set; }
     }
 }
