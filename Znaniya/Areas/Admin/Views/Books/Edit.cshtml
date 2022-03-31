@@ -4,6 +4,9 @@
     ViewData["Title"] = "Edit";
 }
 
+<script src="https://cdn.tiny.cloud/1/mogg3nommg6ahev8n1pzycidh0imoobmmzxzhycge1bub6oq/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<h1>Edit</h1>
+
 
 <h1>Книга</h1>
 <hr />
@@ -30,4 +33,10 @@
         </form>
     </div>
 </div>
+
+  <script>
+    tinymce.init({
+      selector: '#Text'
+    });
+  </script>
 
