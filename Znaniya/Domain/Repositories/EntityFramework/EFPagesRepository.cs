@@ -24,7 +24,10 @@ namespace Znaniya.Domain.Repositories.EntityFramework
         {
             return context.Pages!.FirstOrDefault(x => x.PageID == id)!;
         }
-
+        public IQueryable<Page> GetPagesByChapterId(Guid id)
+        {
+            return context.Pages!.Where(x => x.ChapterID == id)!;
+        }
         public IQueryable<Page> GetPages()
         {
             return context.Pages!;

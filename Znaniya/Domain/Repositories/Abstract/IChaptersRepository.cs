@@ -5,6 +5,7 @@ namespace Znaniya.Domain.Repositories.Abstract
     {
         IQueryable<Chapter> GetChapters();
         Chapter GetChapterById(Guid id);
+        IQueryable<Chapter> GetChaptersByBookId(Guid id);
         void SaveChapter(Chapter entity);
         void DeleteChapter(Guid id);
     }

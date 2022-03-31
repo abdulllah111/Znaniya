@@ -30,7 +30,7 @@
                             <a href="#" onclick="document.getElementById('form-@entity.BookID').submit();">удалить</a>
                         </form>
                         |
-                        <a asp-area="" asp-controller="Books" asp-action="Index" asp-route-id="@entity.BookID">
+                        <a asp-area="Admin" asp-controller="Books" asp-action="Details" asp-route-id="@entity.BookID">
                             @($"{entity.Title}")
                         </a>
                     </div>

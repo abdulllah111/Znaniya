@@ -6,6 +6,7 @@ namespace Znaniya.Domain.Repositories.Abstract
     {
         IQueryable<Page> GetPages();
         Page GetPageById(Guid id);
+        IQueryable<Page> GetPagesByChapterId(Guid id);
         void SavePage(Page entity);
         void DeletePage(Guid id);
     }

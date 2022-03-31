@@ -11,10 +11,14 @@
     <h3>Книги</h3>
 
     <br />
-    <div class="div-box">
+     @if (User.Identity.IsAuthenticated)
+    {
+       <div class="div-box">
         <a asp-area="Admin" asp-controller="Books" asp-action="Add" asp-route-id="@Model!.Shelf!.ShelfID">Добавить книгу</a>
             
     </div>
+    }
+    
     <br />
     @if (Model.Books!.Any())
     {

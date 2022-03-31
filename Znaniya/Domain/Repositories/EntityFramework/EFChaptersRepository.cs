@@ -23,7 +23,10 @@ namespace Znaniya.Domain.Repositories.EntityFramework
         {
             return context.Chapters!.FirstOrDefault(x => x.ChapterId == id)!;
         }
-
+        public IQueryable<Chapter> GetChaptersByBookId(Guid id)
+        {
+            return context.Chapters!.Where(x => x.BookID == id)!;
+        }
         public IQueryable<Chapter> GetChapters()
         {
             return context.Chapters!;

@@ -53,5 +53,14 @@ namespace Znaniya.Areas.Admin.Controllers
             dataManager.Books.DeleteBook(id);
             return RedirectToAction(nameof(ShelfsController.Details), nameof(ShelfsController).CutController(), new {@id = shelfid});
         }
+        public ActionResult Details(Guid id)
+        {
+            var model = new AllPositions
+            {
+                Book = dataManager.Books.GetBookById(id),
+                Chapters = dataManager.Chapters.GetChaptersByBookId(id)
+            };
+            return View(model);
+        }
     }
 }
