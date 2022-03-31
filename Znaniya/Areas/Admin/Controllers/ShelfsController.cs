@@ -20,13 +20,10 @@ namespace MyCompany.Areas.Admin.Controllers
             this.dataManager = dataManager;
             this.hostingEnvironment = hostingEnvironment;
         }
-        public IActionResult Index(Guid id)
+        public IActionResult Index()
         {
 
-            var model = new AllPositions {
-                Shelf = dataManager.Shelfs.GetShelfById(id),
-                Books = dataManager.Books.GetBookByShelfId(id)
-            };
+            var model = dataManager.Shelfs.GetShelves();
             return View(model);
         }
         public IActionResult Edit(Guid id)
@@ -40,7 +37,7 @@ namespace MyCompany.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 dataManager.Shelfs.SaveShelf(model);
-                return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
+                return RedirectToAction(nameof(ShelfsController.Index), nameof(ShelfsController).CutController());
             }
             return View(model);
         }
@@ -49,7 +46,16 @@ namespace MyCompany.Areas.Admin.Controllers
         public IActionResult Delete(Guid id)
         {
             dataManager.Shelfs.DeleteShelf(id);
-            return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
+            return RedirectToAction(nameof(ShelfsController.Index), nameof(ShelfsController).CutController());
+        }
+        public ActionResult Details(Guid id)
+        {
+            var model = new AllPositions
+            {
+                Shelf = dataManager.Shelfs.GetShelfById(id),
+                Books = dataManager.Books.GetBookByShelfId(id)
+            };
+            return View(model);
         }
     }
 }
