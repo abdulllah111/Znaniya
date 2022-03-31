@@ -24,7 +24,12 @@ namespace Znaniya.Controllers
         // GET: ShelfsController/Details/5
         public ActionResult Details(Guid id)
         {
-            return View();
+            var model = new AllPositions
+            {
+                Shelf = dataManager.Shelfs.GetShelfById(id),
+                Books = dataManager.Books.GetBookByShelfId(id)
+            };
+            return View(model);
         }
     }
 }

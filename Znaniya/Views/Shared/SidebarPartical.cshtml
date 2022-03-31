@@ -15,7 +15,7 @@
 					<h2>Меню</h2>
 				</header>
 				<ul>
-					@if (User.Identity.IsAuthenticated){
+					@if (User.Identity!.IsAuthenticated){
 						<li><a asp-area="Admin" asp-controller="Home" asp-action="">Админ панель</a></li>
 					}
 					<li><a asp-area="" asp-controller="Home" asp-action="Index">Главная</a></li>

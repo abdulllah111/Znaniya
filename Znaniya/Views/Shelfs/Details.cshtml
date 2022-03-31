@@ -1,0 +1,35 @@
+﻿@model Znaniya.Domain.Entities.AllPositions
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    string strTitle = "Полка";
+    ViewBag.Title = strTitle;
+}
+
+<div>
+    <h3>Книги</h3>
+
+    <br />
+    <div class="div-box">
+        <a asp-area="Admin" asp-controller="Books" asp-action="Add" asp-route-id="@Model!.Shelf!.ShelfID">Добавить книгу</a>
+            
+    </div>
+    <br />
+    @if (Model.Books!.Any())
+    {
+        <div>
+            @foreach (Znaniya.Domain.Entities.Book entity in Model!.Books!)
+            {
+                <div class="box">
+                    <article>
+			        <h3>@entity.Title</h3>
+			        <p>@entity.Text</p>
+			        <ul class="actions">
+				        <li><a asp-controller="Shelfs" asp-action="Details" asp-route-id="@entity.ShelfID" class="button">Больше</a></li>
+			        </ul>
+		        </article>
+                </div>
+            }
+        </div>
+    }
+</div>
+
