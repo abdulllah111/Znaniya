@@ -34,7 +34,7 @@ namespace Znaniya.Domain
                 Email = "my@email.com",
                 NormalizedEmail = "MY@EMAIL.COM",
                 EmailConfirmed = true,
-                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null!, "superpassword"),
+                PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null!, "123"),
                 SecurityStamp = string.Empty
             });
 
