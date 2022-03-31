@@ -22,11 +22,6 @@ namespace MyCompany.Areas.Admin.Controllers
         }
         public IActionResult Index(Guid id)
         {
-            //var model = dataManager.Shelfs.GetShelfById(id);
-            ////model.Books = from book in dataManager.Shelfs.GetShelves()
-            ////              select new Book { Text = genre., Value = genre.Id.ToString() };
-
-            //model.Books = dataManager.Books.GetBookByShelfId(model.ShelfID);
 
             var model = new AllPositions {
                 Shelf = dataManager.Shelfs.GetShelfById(id),
