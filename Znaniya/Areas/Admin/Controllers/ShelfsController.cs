@@ -22,8 +22,11 @@ namespace MyCompany.Areas.Admin.Controllers
         }
         public IActionResult Index(Guid id)
         {
-            var model = dataManager.Shelfs.GetShelfById(id);
-            model.Books = dataManager.Books.GetBookByShelfId(model.ShelfID);
+
+            var model = new AllPositions {
+                Shelf = dataManager.Shelfs.GetShelfById(id),
+                Books = dataManager.Books.GetBookByShelfId(id)
+            };
             return View(model);
         }
         public IActionResult Edit(Guid id)

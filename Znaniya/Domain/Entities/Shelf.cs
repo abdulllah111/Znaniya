@@ -15,6 +15,6 @@ namespace Znaniya.Domain.Entities
         [Display(Name = "Полное описание полки")]
         public override string? Text { get; set; }
         
-        public IQueryable<Book>? Books { get; set; }
+        public ICollection<Book>? Books { get; set; }
     }
 }

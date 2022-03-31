@@ -7,8 +7,7 @@ namespace Znaniya.Areas.Admin.Controllers
     [Area("Admin")]
     public class HomeController : Controller
     {
-        private readonly DataManager dataManager;
-        
+        private readonly DataManager dataManager;      
 
         public HomeController(DataManager dataManager)
         {

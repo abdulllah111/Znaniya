@@ -1,4 +1,4 @@
-﻿@model Znaniya.Domain.Entities.Shelf
+﻿@model Znaniya.Domain.Entities.AllPositions
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     string strTitle = "Полка";
@@ -10,10 +10,11 @@
 
         <br />
         <div class="div-box">
-            <a asp-area="Admin" asp-controller="Books" asp-action="Edit" asp-route-id="">Добавить книгу</a>
+            <a asp-area="Admin" asp-controller="Books" asp-action="Add" asp-route-id="@Model!.Shelf.ShelfID">Добавить книгу</a>
+            
         </div>
         <br />
-        @if (Model.Books.Any())
+        @if (Model.Books!.Any())
         {
             <div>
                 @foreach (Znaniya.Domain.Entities.Book entity in Model.Books)

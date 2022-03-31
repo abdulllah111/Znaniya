@@ -7,6 +7,7 @@ using Znaniya.Areas.Admin.Controllers;
 using Znaniya.Domain;
 using Znaniya.Service;
 using Znaniya.Domain.Entities;
+using MyCompany.Areas.Admin.Controllers;
 
 namespace Znaniya.Areas.Admin.Controllers
 {
@@ -20,9 +21,15 @@ namespace Znaniya.Areas.Admin.Controllers
             this.dataManager = dataManager;
             this.hostingEnvironment = hostingEnvironment;
         }
+        public IActionResult Add(Guid id)
+        {
+            var entity = new Book() { ShelfID = id };
+            return View(entity);
+        }
+
         public IActionResult Edit(Guid id)
         {
-            var entity = id == default ? new Book() : dataManager.Books.GetBookById(id);
+            var entity = dataManager.Books.GetBookById(id);
             return View(entity);
         }
         [HttpPost]
@@ -31,7 +38,7 @@ namespace Znaniya.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 dataManager.Books.SaveBook(model);
-                return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
+                return RedirectToAction(nameof(ShelfsController.Index), nameof(ShelfsController).CutController());
             }
             return View(model);
         }
@@ -40,7 +47,7 @@ namespace Znaniya.Areas.Admin.Controllers
         public IActionResult Delete(Guid id)
         {
             dataManager.Books.DeleteBook(id);
-            return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).CutController());
+            return RedirectToAction(nameof(ShelfsController.Index), nameof(ShelfsController).CutController());
         }
     }
 }
