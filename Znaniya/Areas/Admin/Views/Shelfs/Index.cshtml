@@ -1,4 +1,4 @@
-﻿@model Znaniya.Domain.Entities.AllPositions
+﻿@model IQueryable<Znaniya.Domain.Entities.Shelf>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     string strTitle = "Полка";
@@ -6,28 +6,26 @@
 }
 
 <div>
-        <h3>Книги</h3>
-
+    <h3>Полки</h3>
         <br />
         <div class="div-box">
-            <a asp-area="Admin" asp-controller="Books" asp-action="Add" asp-route-id="@Model!.Shelf.ShelfID">Добавить книгу</a>
-            
+            <a asp-area="Admin" asp-controller="Shelfs" asp-action="Edit" asp-route-id="">Добавить полку</a>
         </div>
         <br />
-        @if (Model.Books!.Any())
+        @if (Model!.Any())
         {
             <div>
-                @foreach (Znaniya.Domain.Entities.Book entity in Model.Books)
+                @foreach (Znaniya.Domain.Entities.Shelf entity in Model)
                 {
                     <div>
-                        <a asp-area="Admin" asp-controller="Books" asp-action="Edit" asp-route-id="@entity.BookID">редактировать</a>
+                        <a asp-area="Admin" asp-controller="Shelfs" asp-action="Edit" asp-route-id="@entity.ShelfID">редактировать</a>
                         |
-                        <form style="display: inline-block;" id="form-@entity.BookID" asp-area="Admin" asp-controller="Books" asp-action="Delete" method="post">
-                            <input type="hidden" name="id" value="@entity.BookID">
-                            <a href="#" onclick="document.getElementById('form-@entity.BookID').submit();">удалить</a>
+                        <form style="display: inline-block;" id="form-@entity.ShelfID" asp-area="Admin" asp-controller="Shelfs" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@entity.ShelfID">
+                            <a href="#" onclick="document.getElementById('form-@entity.ShelfID').submit();">удалить</a>
                         </form>
                         |
-                        <a asp-area="" asp-controller="Books" asp-action="Index" asp-route-id="@entity.BookID">
+                        <a asp-area="Admin" asp-controller="Shelfs" asp-action="Details" asp-route-id="@entity.ShelfID">
                             @($"{entity.Title}")
                         </a>
                     </div>

@@ -1,0 +1,42 @@
+﻿@model Znaniya.Domain.Entities.AllPositions
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    string strTitle = "Полка";
+    ViewBag.Title = strTitle;
+}
+
+<div>@Html.Raw(Model.Shelf.Text)</div>
+
+<div>
+    <h3>Книги</h3>
+
+    <br />
+    <div class="div-box">
+        <a asp-area="Admin" asp-controller="Books" asp-action="Add" asp-route-id="@Model!.Shelf!.ShelfID">Добавить книгу</a>
+            
+    </div>
+    <br />
+    @if (Model.Books!.Any())
+    {
+        <div>
+            @foreach (Znaniya.Domain.Entities.Book entity in Model.Books)
+                {
+                    <div>
+                        <a asp-area="Admin" asp-controller="Books" asp-action="Edit" asp-route-id="@entity.BookID">редактировать</a>
+                        |
+                        <form style="display: inline-block;" id="form-@entity.BookID" asp-area="Admin" asp-controller="Books" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@entity.BookID">
+                            <input type="hidden" name="shelfid" value="@Model.Shelf.ShelfID">
+                            <a href="#" onclick="document.getElementById('form-@entity.BookID').submit();">удалить</a>
+                        </form>
+                        |
+                        <a asp-area="" asp-controller="Books" asp-action="Index" asp-route-id="@entity.BookID">
+                            @($"{entity.Title}")
+                        </a>
+                    </div>
+
+                }
+        </div>
+    }
+</div>
+

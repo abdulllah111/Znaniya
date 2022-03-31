@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Znaniya.Domain;
 using Znaniya.Domain.Entities;
 
@@ -29,6 +30,7 @@ namespace Znaniya.Controllers
                 Shelf = dataManager.Shelfs.GetShelfById(id),
                 Books = dataManager.Books.GetBookByShelfId(id)
             };
+
             return View(model);
         }
     }

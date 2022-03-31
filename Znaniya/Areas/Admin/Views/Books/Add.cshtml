@@ -13,7 +13,7 @@
         <form asp-area="Admin" asp-controller="Books" asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="BookID"/>
-            <input asp-for="ShelfID" type="hidden"/>
+            <input asp-for="ShelfID" type="hidden" value="@Model.ShelfID"/>
             <input asp-for="DateAdded" type="hidden"  class="form-control" />
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>

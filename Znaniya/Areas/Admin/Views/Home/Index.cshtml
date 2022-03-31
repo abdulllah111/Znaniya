@@ -7,35 +7,11 @@
 <div>
     <h2>@strTitle</h2>
     <div>
-        <h3>Полки</h3>
-        <br />
         <div class="div-box">
-            <a asp-area="Admin" asp-controller="Shelfs" asp-action="Edit" asp-route-id="">Добавить полку</a>
+            <a asp-area="Admin" asp-controller="Shelfs" asp-action="Index" asp-route-id="">Полки</a>
         </div>
-        <br />
-        @if (Model.Shelves.Any())
-        {
-            <div>
-                @foreach (Znaniya.Domain.Entities.Shelf entity in Model.Shelves)
-                {
-                    <div>
-                        <a asp-area="Admin" asp-controller="Shelfs" asp-action="Edit" asp-route-id="@entity.ShelfID">редактировать</a>
-                        |
-                        <form style="display: inline-block;" id="form-@entity.ShelfID" asp-area="Admin" asp-controller="Shelfs" asp-action="Delete" method="post">
-                            <input type="hidden" name="id" value="@entity.ShelfID">
-                            <a href="#" onclick="document.getElementById('form-@entity.ShelfID').submit();">удалить</a>
-                        </form>
-                        |
-                        <a asp-area="Admin" asp-controller="Shelfs" asp-action="Index" asp-route-id="@entity.ShelfID">
-                            @($"{entity.Title}")
-                        </a>
-                    </div>
-                }
-            </div>
-        }
     </div>
 
-    
 
     <div class="div-box">
         <form asp-area="" asp-controller="Account" asp-action="Logout" method="post">

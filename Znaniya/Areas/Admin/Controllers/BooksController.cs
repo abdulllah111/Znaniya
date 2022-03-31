@@ -21,6 +21,10 @@ namespace Znaniya.Areas.Admin.Controllers
             this.dataManager = dataManager;
             this.hostingEnvironment = hostingEnvironment;
         }
+        public IActionResult Index()
+        {
+            return View();
+        }
         public IActionResult Add(Guid id)
         {
             var entity = new Book() { ShelfID = id };
@@ -38,16 +42,16 @@ namespace Znaniya.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 dataManager.Books.SaveBook(model);
-                return RedirectToAction(nameof(ShelfsController.Index), nameof(ShelfsController).CutController());
+                return RedirectToAction(nameof(ShelfsController.Details), nameof(ShelfsController).CutController(), new {@id = model.ShelfID});
             }
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Delete(Guid id)
+        public IActionResult Delete(Guid id, Guid shelfid)
         {
             dataManager.Books.DeleteBook(id);
-            return RedirectToAction(nameof(ShelfsController.Index), nameof(ShelfsController).CutController());
+            return RedirectToAction(nameof(ShelfsController.Details), nameof(ShelfsController).CutController(), new {@id = shelfid});
         }
     }
 }
