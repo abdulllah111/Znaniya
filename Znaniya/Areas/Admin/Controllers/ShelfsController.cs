@@ -22,7 +22,6 @@ namespace MyCompany.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-
             var model = dataManager.Shelfs.GetShelves();
             return View(model);
         }

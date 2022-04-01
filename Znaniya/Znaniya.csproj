@@ -27,6 +27,8 @@
   <ItemGroup>
     <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
+    <None Include="wwwroot\js\messagebox\src\jquery.eatoast.js" />
+    <None Include="wwwroot\js\messagebox\src\jquery.eatoast.min.js" />
   </ItemGroup>
 
   <ItemGroup>

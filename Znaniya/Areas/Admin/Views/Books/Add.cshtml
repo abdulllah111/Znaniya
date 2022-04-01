@@ -26,7 +26,7 @@
                 <span asp-validation-for="Text" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Сохранить" class="btn btn-primary" />
+                <input type="submit" value="Сохранить" class="btn btn-primary get-editor-data" />
             </div>
         </form>
     </div>
@@ -34,7 +34,39 @@
 
   <script>
     tinymce.init({
-      selector: '#Text'
+      selector: '#Text',
+       plugins:
+          "emoticons | code | link image code | lists advlist | autosave | fullscreen",
+        toolbar:
+          "restoredraft | undo redo | styleselect | bold italic | code | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolory | outdent indent | emoticons | fullscreen",
+      
     });
   </script>
 
+  <script>
+    const textArea = document.querySelector("#Text");
+
+    document.querySelector(".get-editor-data").addEventListener("click", () => {
+      let d = tinymce.get("mytextarea").getContent();
+
+      var blockvalues =
+        /input|frame|iframe|DOCTYPE|rea|audio|body|head|button|canvas|atalist|details|embed|iframe|link|main|nav|noscript|object|output|ruby|samp|script|z-index|\w@keyframes|G[a-b].*/i;
+
+      result = d.match(blockvalues);
+
+      $.getScript("~/js/messagebox/src/jquery.eatoast.js", function () {
+        if (result != null) {
+          console.log(`Удалите  ${result}`);
+          $.toast.danger({
+            animate: "slide",
+            autoclose: true,
+            closeBtn: true,
+            style: "warn",
+            text: `Удалите ${result}`,
+            background: "#ff0000",
+          });
+        }
+      });
+    });
+
+  </script>

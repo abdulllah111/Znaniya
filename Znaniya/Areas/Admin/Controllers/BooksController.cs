@@ -8,6 +8,8 @@ using Znaniya.Domain;
 using Znaniya.Service;
 using Znaniya.Domain.Entities;
 using MyCompany.Areas.Admin.Controllers;
+using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace Znaniya.Areas.Admin.Controllers
 {
@@ -41,6 +43,44 @@ namespace Znaniya.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var validation = new string[]
+                {
+                    "input",
+                    "frame",
+                    "iframe",
+                    "DOCTYPE",
+                    "rea",
+                    "audio",
+                    "body",
+                    "head",
+                    "button",
+                    "canvas",
+                    "atalist",
+                    "details",
+                    "embed",
+                    "iframe",
+                    "link",
+                    "main",
+                    "nav",
+                    "noscript",
+                    "object",
+                    "output",
+                    "ruby",
+                    "samp",
+                    "script",
+                    "z-index"
+                };
+                var text = model.Text;
+                foreach (var item in validation)
+                {
+                    if(text!.StartsWith(item, System.StringComparison.CurrentCultureIgnoreCase))
+                    {
+                        
+                    }
+                }
+                
+                
+                //var validtext = text.Where(x => validation.Any(x2 => x2 == x)).First();
                 dataManager.Books.SaveBook(model);
                 return RedirectToAction(nameof(ShelfsController.Details), nameof(ShelfsController).CutController(), new {@id = model.ShelfID});
             }
