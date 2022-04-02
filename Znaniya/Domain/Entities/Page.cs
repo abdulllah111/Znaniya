@@ -8,11 +8,11 @@ namespace Znaniya.Domain.Entities
         public Guid PageID { get; set; }
         public Guid ChapterID { get; set; }
 
-        [Required(ErrorMessage = "Заполните название ukfds")]
-        [Display(Name = "Название книги")]
+        [Required(ErrorMessage = "Заполните название сттаницы")]
+        [Display(Name = "Название страницы")]
         public override string? Title { get; set; }
 
-        [Display(Name = "Полное описание книги")]
+        [Display(Name = "Полное описание страницы")]
         public override string? Text { get; set; }
 
         public Chapter? Chapter { get; set; }

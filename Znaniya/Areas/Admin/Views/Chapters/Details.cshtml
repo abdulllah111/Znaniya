@@ -1,0 +1,41 @@
+﻿@model Znaniya.Domain.Entities.AllPositions
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    string strTitle = "Глава";
+    ViewBag.Title = strTitle;
+}
+
+<div>@Html.Raw(Model!.Chapter!.Text)</div>
+
+<div>
+    <h3>Страницы</h3>
+
+    <br />
+    <div class="div-box">
+        <a asp-area="Admin" asp-controller="Pages" asp-action="Add" asp-route-id="@Model!.Chapter.ChapterId">Добавить главу</a>
+    </div>
+    <br />
+    @if (Model.Pages!.Any())
+    {
+        <div>
+            @foreach (Znaniya.Domain.Entities.Page entity in Model!.Pages!)
+                {
+                    <div>
+                        <a asp-area="Admin" asp-controller="Pages" asp-action="Edit" asp-route-id="@entity.PageID">редактировать</a>
+                        |
+                        <form style="display: inline-block;" id="form-@entity.PageID" asp-area="Admin" asp-controller="Pages" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@entity.PageID">
+                            <input type="hidden" name="chapterid" value="@Model.Chapter.ChapterId">
+                            <a href="#" onclick="document.getElementById('form-@entity.PageID').submit();">удалить</a>
+                        </form>
+                        |
+                        <a asp-area="Admin" asp-controller="Chapters" asp-action="Details" asp-route-id="@entity.PageID">
+                            @($"{entity.Title}")
+                        </a>
+                    </div>
+
+                }
+        </div>
+    }
+</div>
+

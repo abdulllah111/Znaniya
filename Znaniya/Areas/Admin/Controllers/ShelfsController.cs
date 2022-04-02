@@ -27,7 +27,7 @@ namespace MyCompany.Areas.Admin.Controllers
         }
         public IActionResult Edit(Guid id)
         {
-            var entity = id == default ? new Shelf() : dataManager.Shelfs.GetShelfById(id);
+            var entity = id == default ? new Shelf() { DateAdded = DateTime.Now } : dataManager.Shelfs.GetShelfById(id);
             return View(entity);
         }
         [HttpPost]

@@ -14,11 +14,11 @@ using System.Linq;
 namespace Znaniya.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class BooksController : Controller
+    public class ChaptersController : Controller
     {
         private readonly DataManager dataManager;
         private readonly IWebHostEnvironment hostingEnvironment;
-        public BooksController(DataManager dataManager, IWebHostEnvironment hostingEnvironment)
+        public ChaptersController(DataManager dataManager, IWebHostEnvironment hostingEnvironment)
         {
             this.dataManager = dataManager;
             this.hostingEnvironment = hostingEnvironment;
@@ -29,17 +29,17 @@ namespace Znaniya.Areas.Admin.Controllers
         }
         public IActionResult Add(Guid id)
         {
-            var entity = new Book() { ShelfID = id, DateAdded = DateTime.Now };
+            var entity = new Chapter() { BookID = id, DateAdded = DateTime.Now };
             return View(entity);
         }
 
         public IActionResult Edit(Guid id)
         {
-            var entity = dataManager.Books.GetBookById(id);
+            var entity = dataManager.Chapters.GetChapterById(id);
             return View(entity);
         }
         [HttpPost]
-        public IActionResult Edit(Book model)
+        public IActionResult Edit(Chapter model)
         {
             if (ModelState.IsValid)
             {
@@ -68,41 +68,40 @@ namespace Znaniya.Areas.Admin.Controllers
                     "ruby",
                     "samp",
                     "script",
-
                     "z-index"
                 };
                 var text = model.Text;
                 foreach (var item in validation)
                 {
-                    text.Replace(item, "");
-                    //if(text!.StartsWith(item, System.StringComparison.CurrentCultureIgnoreCase))
-                    //{
-                        
-                    //}
+                    if (text!.StartsWith(item, System.StringComparison.CurrentCultureIgnoreCase))
+                    {
+
+                    }
                 }
-                
-                
+
+
                 //var validtext = text.Where(x => validation.Any(x2 => x2 == x)).First();
-                dataManager.Books.SaveBook(model);
-                return RedirectToAction(nameof(ShelfsController.Details), nameof(ShelfsController).CutController(), new {@id = model.ShelfID});
+                dataManager.Chapters.SaveChapter(model);
+                return RedirectToAction(nameof(BooksController.Details), nameof(BooksController).CutController(), new { @id = model.BookID });
             }
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Delete(Guid id, Guid shelfid)
+        public IActionResult Delete(Guid id, Guid bookid)
         {
             dataManager.Books.DeleteBook(id);
-            return RedirectToAction(nameof(ShelfsController.Details), nameof(ShelfsController).CutController(), new {@id = shelfid});
+            return RedirectToAction(nameof(BooksController.Details), nameof(BooksController).CutController(), new { @id = bookid });
         }
         public ActionResult Details(Guid id)
         {
             var model = new AllPositions
             {
-                Book = dataManager.Books.GetBookById(id),
-                Chapters = dataManager.Chapters.GetChaptersByBookId(id)
+                Chapter = dataManager.Chapters.GetChapterById(id),
+                Pages = dataManager.Pages.GetPagesByChapterId(id)
             };
             return View(model);
         }
+
     }
 }

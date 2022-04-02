@@ -9,5 +9,7 @@
         public IQueryable<Book>? Boks { get; set; }
         public Shelf? Shelf { get; set; }
         public Book? Book { get; set; }
+        public Chapter? Chapter { get; set; }
+        public Page? Page { get; set; }
     }
 }
