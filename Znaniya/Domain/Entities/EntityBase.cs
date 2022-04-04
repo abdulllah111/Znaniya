@@ -12,6 +12,9 @@ namespace Znaniya.Domain.Entities
         [Display(Name = "Полное описание")]
         public virtual string? Text { get; set; }
 
+        [Display(Name = "Краткое описание")]
+        public virtual string? SubText { get; set; }
+
         [DataType(DataType.Time)]
         public DateTime DateAdded { get; set; }
     }

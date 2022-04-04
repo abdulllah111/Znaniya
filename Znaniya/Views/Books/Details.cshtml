@@ -1,36 +1,36 @@
 ﻿@model Znaniya.Domain.Entities.AllPositions
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
-    string strTitle = "Полка";
+    string strTitle = "Книга";
     ViewBag.Title = strTitle;
 }
 
-<div>@Html.Raw(Model!.Shelf!.Text)</div>
+<div>@Html.Raw(Model!.Book.Text)</div>
 
 <div>
-    <h3>Книги</h3>
+    <h3>Главы</h3>
 
     <br />
      @if (User!.Identity!.IsAuthenticated)
     {
        <div class="div-box">
-        <a asp-area="Admin" asp-controller="Books" asp-action="Add" asp-route-id="@Model!.Shelf!.ShelfID">Добавить книгу</a>
+        <a asp-area="Admin" asp-controller="Chapters" asp-action="Add" asp-route-id="@Model!.Book!.BookID">Добавить книгу</a>
             
     </div>
     }
     
     <br />
-    @if (Model.Books!.Any())
+    @if (Model.Chapters!.Any())
     {
         <div>
-            @foreach (Znaniya.Domain.Entities.Book entity in Model!.Books!)
+            @foreach (Znaniya.Domain.Entities.Chapter entity in Model!.Chapters!)
             {
                 <div class="box">
                     <article>
 			        <h3>@entity.Title</h3>
 			        <p>@entity.SubText</p>
 			        <ul class="actions">
-				        <li><a asp-controller="Books" asp-action="Details" asp-route-id="@entity.BookID" class="button">Больше</a></li>
+				        <li><a asp-controller="Chapters" asp-action="Details" asp-route-id="@entity.ChapterId" class="button">Больше</a></li>
 			        </ul>
 		        </article>
                 </div>

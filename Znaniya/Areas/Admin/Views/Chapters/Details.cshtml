@@ -12,7 +12,7 @@
 
     <br />
     <div class="div-box">
-        <a asp-area="Admin" asp-controller="Pages" asp-action="Add" asp-route-id="@Model!.Chapter.ChapterId">Добавить главу</a>
+        <a asp-area="Admin" asp-controller="Pages" asp-action="Add" asp-route-id="@Model!.Chapter.ChapterId">Добавить страницу</a>
     </div>
     <br />
     @if (Model.Pages!.Any())
@@ -29,7 +29,7 @@
                             <a href="#" onclick="document.getElementById('form-@entity.PageID').submit();">удалить</a>
                         </form>
                         |
-                        <a asp-area="Admin" asp-controller="Chapters" asp-action="Details" asp-route-id="@entity.PageID">
+                        <a asp-area="Admin" asp-controller="Pages" asp-action="Details" asp-route-id="@entity.PageID">
                             @($"{entity.Title}")
                         </a>
                     </div>

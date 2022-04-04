@@ -1,22 +1,20 @@
-﻿@model Znaniya.Domain.Entities.Book
+﻿@model Znaniya.Domain.Entities.Page
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
-    ViewData["Title"] = "Edit";
+    string strTitle = "Страница";
+    ViewBag.Title = strTitle;
 }
-
 <script src="https://cdn.tiny.cloud/1/mogg3nommg6ahev8n1pzycidh0imoobmmzxzhycge1bub6oq/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<h1>Edit</h1>
-
 
 <h1>Книга</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-area="Admin" asp-controller="Books" asp-action="Edit" method="post" enctype="multipart/form-data">
+        <form asp-area="Admin" asp-controller="Pages" asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="BookID"/>
-            <input asp-for="ShelfID" type="hidden"/>
-            <input asp-for="DateAdded" type="hidden"  class="form-control" />
+                <input type="hidden" asp-for="DateAdded" class="form-control" />
+                <input type="hidden"  asp-for="ChapterID" class ="form-control" />
+            
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
@@ -30,10 +28,10 @@
             <div class="form-group">
                 <label asp-for="SubText" class="control-label"></label>
                 <input asp-for="SubText" class="form-control" />
-                <span asp-validation-for="Text" class="text-danger"></span>
+                <span asp-validation-for="SubText" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Сохранить" class="btn btn-primary" />
+                <input type="submit" value="Сохранить" class="btn btn-primary get-editor-data" />
             </div>
         </form>
     </div>
@@ -49,4 +47,3 @@
       
     });
   </script>
-

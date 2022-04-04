@@ -1,0 +1,9 @@
+﻿@model Znaniya.Domain.Entities.Page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    string strTitle = "Страница";
+    ViewBag.Title = strTitle;
+}
+
+<div>@Html.Raw(Model!.Text)</div>
+
