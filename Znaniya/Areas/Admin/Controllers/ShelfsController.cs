@@ -7,6 +7,9 @@ using Znaniya.Areas.Admin.Controllers;
 using Znaniya.Domain;
 using Znaniya.Service;
 using Znaniya.Domain.Entities;
+using AngleSharp;
+using AngleSharp.Html.Parser;
+using AngleSharp.Dom;
 
 namespace MyCompany.Areas.Admin.Controllers
 {
@@ -35,11 +38,21 @@ namespace MyCompany.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                List<string> hrefTags = new List<string>();
+
+                var parser = new HtmlParser();
+                var document = parser.ParseDocument(model.Text);
+                foreach (IElement element in document.QuerySelectorAll("a"))
+                {
+                    hrefTags.Add(element.GetAttribute("input"));
+                }
                 dataManager.Shelfs.SaveShelf(model);
                 return RedirectToAction(nameof(ShelfsController.Index), nameof(ShelfsController).CutController());
             }
             return View(model);
         }
+
+
 
         [HttpPost]
         public IActionResult Delete(Guid id)
