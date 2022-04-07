@@ -10,6 +10,9 @@ using Znaniya.Domain.Entities;
 using MyCompany.Areas.Admin.Controllers;
 using System.Text.RegularExpressions;
 using System.Linq;
+using AngleSharp.Html.Parser;
+using AngleSharp.Dom;
+using AngleSharp.Html.Dom;
 
 namespace Znaniya.Areas.Admin.Controllers
 {
@@ -43,48 +46,72 @@ namespace Znaniya.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var validation = new string[]
-                {
-                    "input",
-                    "frame",
-                    "iframe",
-                    "DOCTYPE",
-                    "rea",
-                    "audio",
-                    "body",
-                    "head",
-                    "button",
-                    "canvas",
-                    "atalist",
-                    "details",
-                    "embed",
-                    "iframe",
-                    "link",
-                    "main",
-                    "nav",
-                    "noscript",
-                    "object",
-                    "output",
-                    "ruby",
-                    "samp",
-                    "script",
+                //var validation = new string[]
+                //{
+                //    "input",
+                //    "frame",
+                //    "iframe",
+                //    "DOCTYPE",
+                //    "rea",
+                //    "audio",
+                //    "body",
+                //    "head",
+                //    "button",
+                //    "canvas",
+                //    "atalist",
+                //    "details",
+                //    "embed",
+                //    "iframe",
+                //    "link",
+                //    "main",
+                //    "nav",
+                //    "noscript",
+                //    "object",
+                //    "output",
+                //    "ruby",
+                //    "samp",
+                //    "script",
 
-                    "z-index"
-                };
-                var text = model.Text;
-                foreach (var item in validation)
+                //    "z-index"
+                //};
+                //var text = model.Text;
+                //foreach (var item in validation)
+                //{
+                //    text.Replace(item, "");
+
+                //}
+                var page = TempData["page"];
+
+                List<string> hrefTags = new List<string>();
+
+                var parser = new HtmlParser();
+                var document = parser.ParseDocument(model.Text);
+                foreach (IElement element in document.QuerySelectorAll("input"))
                 {
-                    text.Replace(item, "");
-                    //if(text!.StartsWith(item, System.StringComparison.CurrentCultureIgnoreCase))
-                    //{
-                        
-                    //}
+                    hrefTags.Add(element.NodeName);
                 }
-                
-                
-                //var validtext = text.Where(x => validation.Any(x2 => x2 == x)).First();
-                dataManager.Books.SaveBook(model);
-                return RedirectToAction(nameof(ShelfsController.Details), nameof(ShelfsController).CutController(), new {@id = model.ShelfID});
+                if(hrefTags.Count > 0)
+                {
+                    Response.WriteAsync(
+                         //$"<script>alert('Your text');</script>"
+                         $"<script>" +
+                         $"$.toast.danger({{" +
+                         $"animate: 'slide'," +
+                         $"autoclose: true," +
+                         $"closeBtn: true," +
+                         $"style: 'warn'," +
+                         $"text: `Удалите ${{result}}`," +
+                         $"background: '#ff0000'," +
+                         $"}});" +
+                         $"}});</script>"
+                         );
+                    return View(model);
+                }
+                else
+                {
+                    dataManager.Books.SaveBook(model);
+                    return RedirectToAction(nameof(ShelfsController.Details), nameof(ShelfsController).CutController(), new { @id = model.ShelfID });
+                }  
             }
             return View(model);
         }

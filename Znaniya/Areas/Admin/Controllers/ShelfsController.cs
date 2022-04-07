@@ -38,14 +38,6 @@ namespace MyCompany.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                List<string> hrefTags = new List<string>();
-
-                var parser = new HtmlParser();
-                var document = parser.ParseDocument(model.Text);
-                foreach (IElement element in document.QuerySelectorAll("a"))
-                {
-                    hrefTags.Add(element.GetAttribute("input"));
-                }
                 dataManager.Shelfs.SaveShelf(model);
                 return RedirectToAction(nameof(ShelfsController.Index), nameof(ShelfsController).CutController());
             }
