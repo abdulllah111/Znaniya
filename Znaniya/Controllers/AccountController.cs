@@ -19,14 +19,13 @@ namespace Znaniya.Controllers
             }
 
             [AllowAnonymous]
-            public IActionResult Login(string returnUrl)
+            public IActionResult Login()
             {
-                ViewBag.returnUrl = returnUrl;
                 return View(new LoginViewModel());
             }
             [HttpPost]
             [AllowAnonymous]
-            public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
+            public async Task<IActionResult> Login(LoginViewModel model)
             {
                 if (ModelState.IsValid)
                 {
@@ -37,8 +36,8 @@ namespace Znaniya.Controllers
                         Microsoft.AspNetCore.Identity.SignInResult result = await signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, false);
                         if (result.Succeeded)
                         {
-                            return Redirect(returnUrl ?? "/");
-                        }
+                            return RedirectToAction("Index", "Home");
+                    }
                     }
                     ModelState.AddModelError(nameof(LoginViewModel.UserName), "Неверный логин или пароль");
                 }
