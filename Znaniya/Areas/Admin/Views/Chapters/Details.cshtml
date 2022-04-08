@@ -12,7 +12,7 @@
 
     <br />
     <div class="div-box">
-        <a asp-area="Admin" asp-controller="Pages" asp-action="Add" asp-route-id="@Model!.Chapter.ChapterId">Добавить страницу</a>
+        <a asp-area="Admin" asp-controller="Pages" asp-action="Add" asp-route-id="@Model!.Chapter.ChapterID">Добавить страницу</a>
     </div>
     <br />
     @if (Model.Pages!.Any())
@@ -25,7 +25,7 @@
                         |
                         <form style="display: inline-block;" id="form-@entity.PageID" asp-area="Admin" asp-controller="Pages" asp-action="Delete" method="post">
                             <input type="hidden" name="id" value="@entity.PageID">
-                            <input type="hidden" name="chapterid" value="@Model.Chapter.ChapterId">
+                            <input type="hidden" name="chapterid" value="@Model.Chapter.ChapterID">
                             <a href="#" onclick="document.getElementById('form-@entity.PageID').submit();">удалить</a>
                         </form>
                         |

@@ -14,7 +14,7 @@
     <div class="col-md-4">
         <form asp-area="Admin" asp-controller="Chapters" asp-action="Edit" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ChapterId"/>
+            <input type="hidden" asp-for="ChapterID"/>
             <input asp-for="BookID" type="hidden"/>
             <input asp-for="DateAdded" type="hidden"  class="form-control" />
             <div class="form-group">

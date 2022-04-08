@@ -5,7 +5,7 @@ namespace Znaniya.Domain.Entities
     public class Chapter : EntityBase
     {
         [Required]
-        public Guid ChapterId { get; set; }
+        public Guid ChapterID { get; set; }
         public Guid BookID { get; set; }
 
         [Required(ErrorMessage = "Заполните название главы")]

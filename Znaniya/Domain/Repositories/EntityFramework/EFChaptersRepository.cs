@@ -15,13 +15,13 @@ namespace Znaniya.Domain.Repositories.EntityFramework
         }
         public void DeleteChapter(Guid id)
         {
-            context.Chapters!.Remove(new Chapter() { ChapterId = id });
+            context.Chapters!.Remove(new Chapter() { ChapterID = id });
             context.SaveChanges();
         }
 
         public Chapter GetChapterById(Guid id)
         {
-            return context.Chapters!.FirstOrDefault(x => x.ChapterId == id)!;
+            return context.Chapters!.FirstOrDefault(x => x.ChapterID == id)!;
         }
         public IQueryable<Chapter> GetChaptersByBookId(Guid id)
         {
@@ -34,7 +34,7 @@ namespace Znaniya.Domain.Repositories.EntityFramework
 
         public void SaveChapter(Chapter entity)
         {
-            if (entity.ChapterId == default)
+            if (entity.ChapterID == default)
                 context.Entry(entity).State = EntityState.Added;
             else
                 context.Entry(entity).State = EntityState.Modified;

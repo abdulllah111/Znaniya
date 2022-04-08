@@ -21,15 +21,15 @@
             @foreach (Znaniya.Domain.Entities.Chapter entity in Model!.Chapters!)
                 {
                     <div>
-                        <a asp-area="Admin" asp-controller="Chapters" asp-action="Edit" asp-route-id="@entity.ChapterId">редактировать</a>
+                        <a asp-area="Admin" asp-controller="Chapters" asp-action="Edit" asp-route-id="@entity.ChapterID">редактировать</a>
                         |
-                        <form style="display: inline-block;" id="form-@entity.ChapterId" asp-area="Admin" asp-controller="Chapters" asp-action="Delete" method="post">
-                            <input type="hidden" name="id" value="@entity.ChapterId">
+                        <form style="display: inline-block;" id="form-@entity.ChapterID" asp-area="Admin" asp-controller="Chapters" asp-action="Delete" method="post">
+                            <input type="hidden" name="id" value="@entity.ChapterID">
                             <input type="hidden" name="bookid" value="@Model.Book.BookID">
-                            <a href="#" onclick="document.getElementById('form-@entity.ChapterId').submit();">удалить</a>
+                            <a href="#" onclick="document.getElementById('form-@entity.ChapterID').submit();">удалить</a>
                         </form>
                         |
-                        <a asp-area="Admin" asp-controller="Chapters" asp-action="Details" asp-route-id="@entity.ChapterId">
+                        <a asp-area="Admin" asp-controller="Chapters" asp-action="Details" asp-route-id="@entity.ChapterID">
                             @($"{entity.Title}")
                         </a>
                     </div>
